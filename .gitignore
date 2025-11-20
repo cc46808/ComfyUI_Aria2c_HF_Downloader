@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Aria2c binaries (users should download themselves)
+bin/aria2c*
+bin/aria2-*/
+
+# Keep the bin directory structure
+!bin/README.md
+
+# Downloaded models (if any test files)
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+
+# Aria2 control files
+*.aria2
+
+# Environment files with tokens
+.env
+.env.local
+
+# Logs
+*.log
