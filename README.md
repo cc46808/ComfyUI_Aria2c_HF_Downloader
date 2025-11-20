@@ -31,7 +31,7 @@ Fast, resumable multi-threaded downloads from HuggingFace using aria2c.
 
 2. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/ComfyUI_Aria2c_HF_Downloader.git
+   git clone https://github.com/cc46808/ComfyUI_Aria2c_HF_Downloader.git
    ```
 
 3. Restart ComfyUI
@@ -44,9 +44,53 @@ Fast, resumable multi-threaded downloads from HuggingFace using aria2c.
 
 ## Important: Security Settings
 
-This node executes aria2c to download files. You need to adjust ComfyUI's security settings:
+This package includes TWO download nodes:
 
-**Method 1: Start ComfyUI with local listen flag (Recommended)**
+### 1. **HF Downloader (Desktop Compatible)** - RECOMMENDED FOR COMFYUI-DESKTOP
+- ✅ Works with ComfyUI-Desktop's strict security settings
+- ✅ No external processes or aria2c required
+- ✅ Pure Python implementation using urllib
+- ⚠️ Single-threaded downloads (slower than aria2c)
+- Use this node if you get "security level" errors
+
+### 2. **Aria2c HF Downloader** - RECOMMENDED FOR STANDARD COMFYUI
+- ✅ Fast multi-threaded downloads (up to 16 connections)
+- ✅ Resume interrupted downloads
+- ⚠️ Requires aria2c installation
+- ⚠️ Requires security settings adjustment (see below)
+
+---
+
+### For ComfyUI-Desktop Users
+
+**SOLUTION: Use "HF Downloader (Desktop Compatible)" node instead!**
+
+This node doesn't require any security changes. Just add it to your workflow and use it like the aria2c version (but without the connection settings).
+
+If you still want to use the faster aria2c version, you'll need to adjust security:
+
+### For ComfyUI-Desktop Users
+
+**Option 1: Use Config File (Recommended)**
+1. Close ComfyUI-Desktop
+2. Navigate to your ComfyUI user directory:
+   - Windows: `%APPDATA%\comfyui\` or `%USERPROFILE%\.comfyui\`
+   - macOS: `~/Library/Application Support/comfyui/`
+   - Linux: `~/.config/comfyui/`
+3. Create or edit `extra_model_paths.yaml` or look for a config file
+4. Add command line arguments file or edit startup config
+
+**Option 2: Temporary Workaround**
+1. Open ComfyUI Manager from the menu
+2. Look for dropdowns at the top (DB: Channel, Channel, Preview method, Share, Component)
+3. Check if "Share: None" can be changed to allow the node to run
+4. If not available, you may need to use standard ComfyUI installation instead
+
+**Note:** ComfyUI-Desktop security settings may be configured differently. If these options don't work, consider using the standard ComfyUI installation with Python.
+
+### For Standard ComfyUI Installation
+
+**Method 1: Start with local listen flag (Recommended)**
 ```bash
 python main.py --listen 127.0.0.1
 ```
