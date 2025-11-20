@@ -42,6 +42,22 @@ Fast, resumable multi-threaded downloads from HuggingFace using aria2c.
 2. Extract to `ComfyUI/custom_nodes/ComfyUI_Aria2c_HF_Downloader`
 3. Restart ComfyUI
 
+## Important: Security Settings
+
+This node executes aria2c to download files. You need to adjust ComfyUI's security settings:
+
+**Method 1: Start ComfyUI with local listen flag (Recommended)**
+```bash
+python main.py --listen 127.0.0.1
+```
+
+**Method 2: Lower security level in ComfyUI Manager**
+- Open ComfyUI Manager settings
+- Change security level to "normal" or lower
+- Restart ComfyUI
+
+See [ComfyUI Manager Security Policy](https://github.com/ltdrdata/ComfyUI-Manager#security-policy) for more details.
+
 ## aria2c Setup
 
 The node will automatically detect aria2c from:
