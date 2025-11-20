@@ -69,24 +69,42 @@ This node doesn't require any security changes. Just add it to your workflow and
 
 If you still want to use the faster aria2c version, you'll need to adjust security:
 
-### For ComfyUI-Desktop Users
+### For ComfyUI-Desktop Users (Aria2c Version)
 
-**Option 1: Use Config File (Recommended)**
-1. Close ComfyUI-Desktop
-2. Navigate to your ComfyUI user directory:
-   - Windows: `%APPDATA%\comfyui\` or `%USERPROFILE%\.comfyui\`
-   - macOS: `~/Library/Application Support/comfyui/`
-   - Linux: `~/.config/comfyui/`
-3. Create or edit `extra_model_paths.yaml` or look for a config file
-4. Add command line arguments file or edit startup config
+**To enable the fast aria2c downloader, edit the ComfyUI Manager config:**
 
-**Option 2: Temporary Workaround**
-1. Open ComfyUI Manager from the menu
-2. Look for dropdowns at the top (DB: Channel, Channel, Preview method, Share, Component)
-3. Check if "Share: None" can be changed to allow the node to run
-4. If not available, you may need to use standard ComfyUI installation instead
+1. **Close ComfyUI-Desktop completely**
 
-**Note:** ComfyUI-Desktop security settings may be configured differently. If these options don't work, consider using the standard ComfyUI installation with Python.
+2. **Find and open `config.ini`** in Notepad or any text editor:
+   ```
+   C:\Users\YOUR_USERNAME\AppData\Local\Programs\ComfyUI\resources\ComfyUI\user\default\ComfyUI-Manager\config.ini
+   ```
+   
+   Alternative locations if not found:
+   - `...\ComfyUI\custom_nodes\ComfyUI-Manager\config.ini`
+   - macOS: `~/Library/Application Support/ComfyUI/...`
+   - Linux: `~/.config/ComfyUI/...`
+
+3. **Change security level** - Find the line:
+   ```ini
+   security_level = normal
+   ```
+   
+   Change it to:
+   ```ini
+   security_level = normal-
+   ```
+   
+   Or for more permissive (temporarily):
+   ```ini
+   security_level = weak
+   ```
+
+4. **Save the file and restart ComfyUI-Desktop**
+
+5. **Optional:** After installation, you can increase security back to `normal-` or `normal`
+
+**OR use the "HF Downloader (Desktop Compatible)" node** which requires no configuration changes!
 
 ### For Standard ComfyUI Installation
 
