@@ -68,16 +68,15 @@ class Aria2cHuggingFaceDownloader:
     OUTPUT_NODE = True
     
     def __init__(self):
-        # Try to find aria2c executable
+        # Try to find aria2c executable (but don't fail if not found)
         self.aria2c_path = self._find_aria2c()
         
         if not self.aria2c_path:
-            raise Exception(
-                "aria2c is not installed or not found. Please either:\n"
-                "1. Install aria2c system-wide, OR\n"
-                "2. Place aria2c.exe (Windows) or aria2c binary (Linux/Mac) in this node's 'bin' folder:\n"
-                f"   {os.path.join(os.path.dirname(__file__), 'bin')}"
-            )
+            print("[Aria2c HF Downloader] Warning: aria2c not found. This node will not work until aria2c is installed.")
+            print("[Aria2c HF Downloader] Please either:")
+            print("[Aria2c HF Downloader]   1. Install aria2c system-wide, OR")
+            print(f"[Aria2c HF Downloader]   2. Place aria2c in: {os.path.join(os.path.dirname(__file__), 'bin')}")
+            print("[Aria2c HF Downloader] Alternatively, use the 'HF Downloader (Desktop Compatible)' node instead.")
     
     def _find_aria2c(self):
         """
@@ -263,6 +262,16 @@ class Aria2cHuggingFaceDownloader:
         """
         Download file from HuggingFace using aria2c
         """
+        # Check if aria2c is available
+        if not self.aria2c_path:
+            raise Exception(
+                "aria2c is not installed or not found.\n\n"
+                "Please either:\n"
+                "1. Install aria2c system-wide (see README), OR\n"
+                "2. Place aria2c in the 'bin' folder of this node, OR\n"
+                "3. Use the 'HF Downloader (Desktop Compatible)' node instead (no aria2c required)"
+            )
+        
         # Validate URL
         if not url or not url.strip():
             raise ValueError("URL cannot be empty")
